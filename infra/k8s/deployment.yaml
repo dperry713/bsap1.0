@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bsap-orchestrator
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bsap
+  template:
+    metadata:
+      labels:
+        app: bsap
+    spec:
+      containers:
+      - name: orchestrator
+        image: bsap/orchestrator:latest
+        ports:
+        - containerPort: 8080

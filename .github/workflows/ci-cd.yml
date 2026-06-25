@@ -1,0 +1,53 @@
+name: BSAP CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Rust Build & Test
+      run: |
+        cd rust
+        cargo fmt -- --check
+        cargo clippy -- -D warnings
+        cargo test
+        cargo build --release
+
+  dotnet:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: .NET Build
+      run: |
+        cd dotnet
+        dotnet restore
+        dotnet build --configuration Release
+        dotnet test
+
+  nodejs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Node.js Build
+      run: |
+        cd nodejs/dashboard
+        npm ci
+        npm run build
+        npm test
+
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Trivy Scan
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        severity: 'CRITICAL,HIGH'

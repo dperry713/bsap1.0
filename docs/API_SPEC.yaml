@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  title: BSAP API
+  version: 1.0.0
+paths:
+  /scan:
+    post:
+      summary: Start a new scan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                target: { type: string }
+                scanType: { type: string }
+      responses:
+        '200':
+          description: Scan started

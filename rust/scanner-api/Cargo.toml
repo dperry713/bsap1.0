@@ -1,0 +1,8 @@
+[package]
+name = "scanner-api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+scanner-core = { path = "../scanner-core" }
+regex = "1.10"
