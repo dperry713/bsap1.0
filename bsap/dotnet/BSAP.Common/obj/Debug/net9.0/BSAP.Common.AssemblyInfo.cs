@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BSAP.Common")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4b502f3e40ab61adb7655a5d52e1dd7ed3616ba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d567bb22bfa3622bf7e895b16f09978bc9fae07d")]
 [assembly: System.Reflection.AssemblyProductAttribute("BSAP.Common")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BSAP.Common")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
