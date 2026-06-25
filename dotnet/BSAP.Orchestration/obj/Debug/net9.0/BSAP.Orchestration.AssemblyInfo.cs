@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BSAP.Orchestration")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f8eb24c6f0af53a2a4ddbea866275be1796b0ef2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4b502f3e40ab61adb7655a5d52e1dd7ed3616ba")]
 [assembly: System.Reflection.AssemblyProductAttribute("BSAP.Orchestration")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BSAP.Orchestration")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
