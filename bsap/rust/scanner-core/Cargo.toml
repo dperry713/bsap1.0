@@ -1,0 +1,16 @@
+[package]
+name = "scanner-core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio.workspace = true
+rayon.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+anyhow.workspace = true
+tracing.workspace = true
+goblin.workspace = true
+capstone.workspace = true
+tree-sitter.workspace = true
+petgraph.workspace = true

@@ -1,0 +1,8 @@
+[package]
+name = "scanner-dependency"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+scanner-core = { path = "../scanner-core" }
+serde_json = "1.0"

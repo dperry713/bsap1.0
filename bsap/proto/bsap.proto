@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+package bsap;
+
+option go_package = "bsap/proto";
+option java_package = "com.bsaps.security";
+option csharp_namespace = "BSAP.Grpc";
+option java_multiple_files = true;
+
+// Core messages shared across services
+message Finding {
+  string id = 1;
+  string severity = 2; // critical, high, medium, low, informational
+  string cwe = 3;
+  string type = 4;
+  string description = 5;
+  string evidence = 6;
+  double confidence = 7;
+  string remediation = 8;
+  map<string, string> metadata = 9;
+}
+
+message ScanRequest {
+  string scan_id = 1;
+  string scan_type = 2; // memory, malware, api, container, runtime, dependency
+  string target = 3; // path, URL, manifest, etc.
+  bytes target_data = 4; // optional raw content
+  map<string, string> options = 5;
+  string tenant_id = 6;
+}
+
+message ScanResponse {
+  string scan_id = 1;
+  repeated Finding findings = 2;
+  double risk_score = 3;
+  string status = 4; // completed, partial, failed
+  string message = 5;
+  int64 duration_ms = 6;
+}
+
+message BatchScanRequest {
+  repeated ScanRequest requests = 1;
+  string correlation_id = 2;
+}
+
+message BatchScanResponse {
+  repeated ScanResponse responses = 1;
+  string correlation_id = 2;
+}
+
+// Service definitions for Rust gRPC server
+service ScannerService {
+  // Single scan
+  rpc PerformScan(ScanRequest) returns (ScanResponse);
+
+  // Batch scanning for high throughput
+  rpc PerformBatchScan(BatchScanRequest) returns (BatchScanResponse);
+
+  // Specific scanners for fine-grained control
+  rpc ScanMemory(ScanRequest) returns (ScanResponse);
+  rpc ScanMalware(ScanRequest) returns (ScanResponse);
+  rpc ScanApi(ScanRequest) returns (ScanResponse);
+  rpc ScanContainer(ScanRequest) returns (ScanResponse);
+  rpc ScanRuntime(ScanRequest) returns (ScanResponse);
+  rpc ScanDependencies(ScanRequest) returns (ScanResponse);
+
+  // Health and status
+  rpc GetScannerStatus(Empty) returns (StatusResponse);
+}
+
+message Empty {}
+
+message StatusResponse {
+  string status = 1; // healthy, degraded
+  map<string, string> capabilities = 2;
+  int32 version = 3;
+}
+
+// Risk and orchestration messages (used by .NET layer)
+message RiskAssessment {
+  string scan_id = 1;
+  double cvss_score = 2;
+  string owasp_category = 3;
+  string mitre_tactic = 4;
+  repeated string compliance_mappings = 5; // PCI, SOC2, etc.
+}
+
+message OrchestrationRequest {
+  ScanRequest scan = 1;
+  RiskAssessment risk_config = 2;
+}
+
+message OrchestrationResponse {
+  ScanResponse scan_result = 1;
+  RiskAssessment risk_assessment = 2;
+}

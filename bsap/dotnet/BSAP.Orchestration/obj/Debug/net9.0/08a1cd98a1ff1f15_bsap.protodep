@@ -1,0 +1,2 @@
+obj\Debug\net9.0/Bsap.cs \
+obj\Debug\net9.0/BsapGrpc.cs: ../../proto/bsap.proto
